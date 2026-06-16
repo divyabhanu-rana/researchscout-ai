@@ -28,6 +28,8 @@ from tools import TavilySearchTool
 
 T = TypeVar("T", bound=BaseModel)
 
+DEBUG = False
+
 
 class LLMClient:
 
@@ -116,9 +118,9 @@ class ResearchScoutAgent:
         self.search_tool = search_tool
 
     def _parse_model(
-    self,
-    model_cls: Type[T],
-    raw: str,
+        self,
+        model_cls: Type[T],
+        raw: str,
     ) -> T:
 
         cleaned = raw.strip()
@@ -155,11 +157,12 @@ class ResearchScoutAgent:
         # DEBUG OUTPUT
         # --------------------------------------------------
 
-        print("\n" + "=" * 70)
-        print("RAW LLM OUTPUT")
-        print("=" * 70)
-        print(raw)
-        print("=" * 70 + "\n")
+        if DEBUG:
+            print("\n" + "=" * 70)
+            print("RAW LLM OUTPUT")
+            print("=" * 70)
+            print(raw)
+            print("=" * 70 + "\n")
 
         try:
             return self._parse_model(model_cls, raw)
@@ -181,11 +184,12 @@ class ResearchScoutAgent:
                 timeout_s=settings.request_timeout_s,
             )
 
-            print("\n" + "=" * 70)
-            print("REPAIRED LLM OUTPUT")
-            print("=" * 70)
-            print(repaired_raw)
-            print("=" * 70 + "\n")
+            if DEBUG:
+                print("\n" + "=" * 70)
+                print("REPAIRED LLM OUTPUT")
+                print("=" * 70)
+                print(repaired_raw)
+                print("=" * 70 + "\n")
 
             try:
                 return self._parse_model(

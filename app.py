@@ -47,10 +47,19 @@ with st.sidebar:
 
     st.markdown("### Configuration")
 
-    provider = getattr(settings, "llm_provider", "deepseek")
+    provider = getattr(
+        settings,
+        "llm_provider",
+        "deepseek"
+    )
 
-    st.write(f"**LLM Provider:** {provider}")
-    st.write("**Search Tool:** Tavily")
+    st.write(
+        f"**LLM Provider:** {provider}"
+    )
+
+    st.write(
+        "**Search Tool:** Tavily"
+    )
 
     st.divider()
 
@@ -65,21 +74,6 @@ with st.sidebar:
         - Explain Reinforcement Learning
         """
     )
-
-# ==================================================
-# Title Section
-# ==================================================
-
-st.title("🔍 ResearchScout AI")
-
-st.caption(
-    "Agentic Learning & Research Assistant for AI/ML Students"
-)
-
-st.info(
-    "ResearchScout follows a multi-stage agent workflow: "
-    "Decision → Search → Synthesis → Reflection → Response"
-)
 
 # ==================================================
 # Agent Loader
@@ -103,6 +97,66 @@ def load_agent():
 agent = load_agent()
 
 # ==================================================
+# Session State
+# ==================================================
+
+if "history" not in st.session_state:
+
+    st.session_state.history = []
+
+# ==================================================
+# Sidebar History
+# ==================================================
+
+with st.sidebar:
+
+    st.divider()
+
+    st.markdown(
+        "### Previous Questions"
+    )
+
+    if st.session_state.history:
+
+        for item in reversed(
+            st.session_state.history[-10:]
+        ):
+
+            st.markdown(
+                f"- {item}"
+            )
+
+    else:
+
+        st.caption(
+            "No questions asked yet."
+        )
+
+    if st.button(
+        "Clear History",
+        use_container_width=True,
+    ):
+
+        st.session_state.history = []
+
+        st.rerun()
+
+# ==================================================
+# Main Page
+# ==================================================
+
+st.title("🔍 ResearchScout AI")
+
+st.caption(
+    "Agentic Learning & Research Assistant for AI/ML Students"
+)
+
+st.info(
+    "ResearchScout follows a multi-stage workflow: "
+    "Decision → Search → Synthesis → Reflection → Response"
+)
+
+# ==================================================
 # Query Input
 # ==================================================
 
@@ -124,14 +178,20 @@ ask_button = st.button(
 if ask_button:
 
     if not query.strip():
-        st.warning("Please enter a question.")
+
+        st.warning(
+            "Please enter a question."
+        )
+
         st.stop()
 
     try:
 
         start_time = time.time()
 
-        with st.spinner("ResearchScout is thinking..."):
+        with st.spinner(
+            "ResearchScout is thinking..."
+        ):
 
             result = agent.run(query)
 
@@ -140,17 +200,56 @@ if ask_button:
             2
         )
 
-        st.caption(
-            f"⏱ Response generated in {elapsed} seconds"
-        )
+        # ------------------------------------------
+        # Save Query
+        # ------------------------------------------
 
-        # ==========================================
-        # Agent Decision
-        # ==========================================
+        if query not in st.session_state.history:
+
+            st.session_state.history.append(
+                query
+            )
+
+        # ------------------------------------------
+        # Metrics
+        # ------------------------------------------
+
+        col1, col2, col3 = st.columns(3)
+
+        with col1:
+
+            st.metric(
+                "Response Time",
+                f"{elapsed}s"
+            )
+
+        with col2:
+
+            st.metric(
+                "Questions Asked",
+                len(
+                    st.session_state.history
+                )
+            )
+
+        with col3:
+
+            st.metric(
+                "Search Used",
+                "Yes"
+                if result.decision.need_search
+                else "No"
+            )
+
+        # ------------------------------------------
+        # Decision
+        # ------------------------------------------
 
         st.divider()
 
-        st.subheader("🧠 Agent Decision")
+        st.subheader(
+            "🧠 Agent Decision"
+        )
 
         if result.decision.need_search:
 
@@ -164,7 +263,9 @@ if ask_button:
                 "🧠 Internal Knowledge Sufficient"
             )
 
-        st.write("### Reason")
+        st.write(
+            "### Reason"
+        )
 
         st.write(
             result.decision.reason
@@ -174,9 +275,23 @@ if ask_button:
             f"**Tool Used:** `{result.tool_used}`"
         )
 
-        # ==========================================
+        # ------------------------------------------
+        # Download Button
+        # ------------------------------------------
+
+        st.download_button(
+            label="⬇ Download Report",
+            data=result.model_dump_json(
+                indent=2
+            ),
+            file_name="research_report.json",
+            mime="application/json",
+            use_container_width=True,
+        )
+
+        # ------------------------------------------
         # Tabs
-        # ==========================================
+        # ------------------------------------------
 
         tab1, tab2, tab3, tab4 = st.tabs(
             [
@@ -187,13 +302,15 @@ if ask_button:
             ]
         )
 
-        # ==========================================
+        # ------------------------------------------
         # Summary Tab
-        # ==========================================
+        # ------------------------------------------
 
         with tab1:
 
-            st.subheader("Summary")
+            st.subheader(
+                "Summary"
+            )
 
             st.write(
                 result.response.summary
@@ -209,9 +326,9 @@ if ask_button:
                     f"- {step}"
                 )
 
-        # ==========================================
+        # ------------------------------------------
         # Findings Tab
-        # ==========================================
+        # ------------------------------------------
 
         with tab2:
 
@@ -225,9 +342,9 @@ if ask_button:
                     f"- {finding}"
                 )
 
-        # ==========================================
+        # ------------------------------------------
         # Sources Tab
-        # ==========================================
+        # ------------------------------------------
 
         with tab3:
 
@@ -240,8 +357,8 @@ if ask_button:
                 for source in result.response.sources:
 
                     st.link_button(
-                        source.title,
-                        source.url,
+                        label=source.title,
+                        url=source.url,
                         use_container_width=True,
                     )
 
@@ -251,9 +368,9 @@ if ask_button:
                     "No external sources were required."
                 )
 
-        # ==========================================
+        # ------------------------------------------
         # Reflection Tab
-        # ==========================================
+        # ------------------------------------------
 
         with tab4:
 
@@ -286,21 +403,26 @@ if ask_button:
                     else "No"
                 )
 
-            if result.reflection.revision_notes:
+            notes = (
+                result.reflection.revision_notes
+                or []
+            )
+
+            if notes:
 
                 st.subheader(
                     "Revision Notes"
                 )
 
-                for note in result.reflection.revision_notes:
+                for note in notes:
 
                     st.markdown(
                         f"- {note}"
                     )
 
-        # ==========================================
+        # ------------------------------------------
         # Raw Output
-        # ==========================================
+        # ------------------------------------------
 
         with st.expander(
             "🔧 Raw Agent Output"
