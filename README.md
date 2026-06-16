@@ -1,8 +1,42 @@
 # 🔍 ResearchScout AI
 
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
+![DeepSeek](https://img.shields.io/badge/LLM-DeepSeek-purple)
+![Tavily](https://img.shields.io/badge/Search-Tavily-green)
+![License](https://img.shields.io/badge/License-Educational-orange)
+
 > Agentic Learning and Research Assistant for AI/ML Students
 
-ResearchScout AI is an agent-based research assistant designed to help students, researchers, and AI enthusiasts learn complex topics through a structured workflow that combines reasoning, web search, synthesis, reflection, and response generation.
+---
+
+## 🚀 Live Demo
+
+Coming Soon
+
+<!-- Replace with deployment URL after Streamlit deployment -->
+
+```text
+https://your-streamlit-app-url.streamlit.app
+```
+
+---
+
+## Why ResearchScout?
+
+Most educational AI assistants either rely entirely on an LLM's internal knowledge or perform web searches for every query.
+
+ResearchScout introduces an intelligent decision layer that determines whether external search is actually required before generating a response.
+
+This approach:
+
+- Reduces unnecessary search calls
+- Improves response speed
+- Lowers operational costs
+- Preserves answer quality for foundational topics
+- Retrieves current information when necessary
+
+In addition, every response passes through a reflection stage that evaluates completeness, educational value, and source usage before delivering the final answer.
 
 ---
 
@@ -89,7 +123,7 @@ flowchart TD
 
 ![Dashboard](screenshots/dashboard.png)
 
-ResearchScout AI's main interface, showing the agent workflow, configuration panel, example queries, and research input area. The dashboard provides a clean overview of the system before a query is submitted.
+ResearchScout AI's main interface, showing the agent workflow, configuration panel, example queries, and research input area.
 
 ---
 
@@ -99,7 +133,7 @@ ResearchScout AI's main interface, showing the agent workflow, configuration pan
 
 Example query: **"What is Linear Regression?"**
 
-ResearchScout identifies this as a stable, foundational concept and answers directly using internal reasoning without invoking external search. The response includes the agent's decision, reasoning process, educational summary, and recommended next steps.
+ResearchScout identifies this as a stable, foundational concept and answers directly using internal reasoning without invoking external search.
 
 ---
 
@@ -109,7 +143,7 @@ ResearchScout identifies this as a stable, foundational concept and answers dire
 
 Example query: **"Latest developments in Agentic AI"**
 
-ResearchScout determines that the query requires current information and automatically triggers Tavily web search. Retrieved sources are synthesized into a structured response with supporting references and learning recommendations.
+ResearchScout determines that the query requires current information and automatically triggers Tavily web search.
 
 ---
 
@@ -211,8 +245,6 @@ REQUEST_TIMEOUT_S=45
 
 ## ▶️ Running the Application
 
-Launch the Streamlit interface:
-
 ```bash
 streamlit run app.py
 ```
@@ -311,6 +343,7 @@ researchscout-ai/
 ├── cli.py
 ├── requirements.txt
 ├── .env.example
+├── screenshots/
 └── README.md
 ```
 
