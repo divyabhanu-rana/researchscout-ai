@@ -10,7 +10,7 @@ load_dotenv()
 @dataclass(frozen=True)
 class Settings:
 
-    llm_provider: str = os.getenv("LLM_PROVIDER", "ollama")
+    llm_provider: str = os.getenv("LLM_PROVIDER", "deepseek")
 
     # Deepseek API
     deepseek_api_key: str | None = os.getenv("DEEPSEEK_API_KEY")
