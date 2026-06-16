@@ -85,29 +85,39 @@ flowchart TD
 
 ## 🖼️ Screenshots
 
+### Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+ResearchScout AI's main interface, showing the agent workflow, configuration panel, example queries, and research input area. The dashboard provides a clean overview of the system before a query is submitted.
+
+---
+
 ### Internal Knowledge Query
 
-Example: *"What is Linear Regression?"*
+![Linear Regression](screenshots/linear_regression.png)
 
-```text
-(Add Screenshot Here)
-```
+Example query: **"What is Linear Regression?"**
 
-### Web Search Query
+ResearchScout identifies this as a stable, foundational concept and answers directly using internal reasoning without invoking external search. The response includes the agent's decision, reasoning process, educational summary, and recommended next steps.
 
-Example: *"Latest developments in Agentic AI"*
+---
 
-```text
-(Add Screenshot Here)
-```
+### External Search Query
 
-### Model Comparison Query
+![Agentic AI Search](screenshots/agentic_ai_search.png)
 
-Example: *"Compare BERT and GPT"*
+Example query: **"Latest developments in Agentic AI"**
 
-```text
-(Add Screenshot Here)
-```
+ResearchScout determines that the query requires current information and automatically triggers Tavily web search. Retrieved sources are synthesized into a structured response with supporting references and learning recommendations.
+
+---
+
+### Reflection Layer
+
+![Reflection](screenshots/reflection.png)
+
+ResearchScout evaluates every generated response through a reflection stage. The system checks for completeness, educational value, source usage, and whether revision is required before delivering the final answer.
 
 ---
 
