@@ -17,7 +17,7 @@ Coming Soon
 <!-- Replace with deployment URL after Streamlit deployment -->
 
 ```text
-https://your-streamlit-app-url.streamlit.app
+[https://your-streamlit-app-url.streamlit.app](https://researchscout-ai.streamlit.app/)
 ```
 
 ---
