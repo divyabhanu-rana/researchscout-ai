@@ -34,7 +34,7 @@ class SearchResult(BaseModel):
         description="Title of the search result."
     )
 
-    url: HttpUrl
+    url: str
 
     snippet: str = Field(
         ...,
@@ -54,7 +54,7 @@ class Source(BaseModel):
         description="Source title."
     )
 
-    url: HttpUrl
+    url: str
 
 
 class ResearchResponse(BaseModel):

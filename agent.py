@@ -361,6 +361,18 @@ class ResearchScoutAgent:
                 schema_hint='{"query_type":"no_search"}',
             )
 
+        # # ==========================================
+        # # TEMPORARY REFLECTION TEST
+        # # ==========================================
+
+        # draft = ResearchResponse(
+        #     query_type="no_search",
+        #     summary="Linear Regression is a neural network.",
+        #     key_findings=[],
+        #     recommended_next_steps=[],
+        #     sources=[],
+        #     )    
+
         # --------------------------------------------------
         # Reflection Layer
         # --------------------------------------------------
