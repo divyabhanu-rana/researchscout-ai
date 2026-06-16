@@ -12,12 +12,24 @@
 
 ## 🚀 Live Demo
 
-Coming Soon
+Try ResearchScout AI directly in your browser:
 
-<!-- Replace with deployment URL after Streamlit deployment -->
+🔗 **Live Application:** https://researchscout-ai.streamlit.app/
+
+No installation required. Simply open the app, enter a research question, and ResearchScout will determine whether the query can be answered from internal knowledge or requires external web search.
+
+### Example Queries
 
 ```text
-[https://your-streamlit-app-url.streamlit.app](https://researchscout-ai.streamlit.app/)
+What is Linear Regression?
+
+Explain Gradient Descent
+
+Compare BERT and GPT
+
+Latest developments in Agentic AI
+
+Most in-demand AI skills in 2026
 ```
 
 ---
