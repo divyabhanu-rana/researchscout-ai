@@ -140,6 +140,16 @@ Requirements:
 - Include all relevant sources available from the search results.
 - Never invent sources.
 
+IMPORTANT:
+
+If search_results is empty:
+
+- Do NOT invent facts.
+- Do NOT assume the entity, company, product, framework, or concept exists.
+- State clearly that no reliable information could be found.
+- Suggest that the user provide additional context or verify the spelling.
+- Return a valid ResearchResponse JSON object.
+
 User Question:
 {question}
 

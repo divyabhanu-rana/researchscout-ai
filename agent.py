@@ -344,15 +344,25 @@ class ResearchScoutAgent:
 
         elif decision.need_search and not search_results:
 
-            draft = self._ask_and_parse(
-                model_cls=ResearchResponse,
-                user_prompt=SYNTHESIS_NO_SEARCH_PROMPT.format(
-                    question=(
-                        question
-                        + "\n\nSearch failed. Answer using internal knowledge."
-                    )
+            draft = ResearchResponse(
+                query_type="search",
+                summary=(
+                    "No reliable external information could be found "
+                    f"for '{question}'."
                 ),
-                schema_hint='{"query_type":"no_search"}',
+                key_findings=[
+                    "The query was classified as requiring web search.",
+                    "No reliable search results were returned.",
+                    "Generating an answer from internal knowledge could be inaccurate.",
+                    "The requested topic may be niche, misspelled, newly created, or insufficiently documented online.",
+                ],
+                recommended_next_steps=[
+                    "Verify the spelling of the term.",
+                    "Provide additional context about the topic.",
+                    "Try a more specific query.",
+                    "Search again later if the topic is very recent.",
+                ],
+                sources=[],
             )
 
         else:
