@@ -213,6 +213,10 @@ Additional Evaluation Rules:
 
 * Only request revision when there is a meaningful factual, educational, structural, or sourcing deficiency.
 
+If external search was attempted but no reliable sources were found,
+do not penalize the answer for missing sources if the response
+explicitly acknowledges that no reliable information could be found.
+
 User Question:
 {question}
 
